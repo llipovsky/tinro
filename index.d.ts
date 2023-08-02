@@ -1,9 +1,19 @@
+import {SvelteComponent} from "svelte";
+
 interface TinroRoute {
     url: string
     from: string
     path: string
     query: Record<string, string>
     hash: string
+}
+
+interface RouteProps {
+  path?: string;
+  fallback?: boolean;
+  redirect?: string;
+  firstmatch?: boolean;
+  breadcrumb?: string;
 }
 
 interface TinroBreadcrumb {
@@ -81,7 +91,7 @@ declare interface TinroRouter {
 export const active: any
 export function meta(): TinroRouteMeta
 export const router: TinroRouter
-export class Route {
+export class Route extends SvelteComponent<RouteProps> {
     $$prop_def: {
       /**
        * Exact o relative path of the route
